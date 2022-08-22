@@ -71,6 +71,10 @@ def get_message():
     """
     :return: 返回消息
     """
-    data = request.args.to_dict()
-    print(data)
-    return ""
+    print(request.args.to_dict())
+    print(request.form.to_dict())
+    print(request.data)
+    # data = request.get_json()
+    print("data")
+    data = "Success"
+    return make_succ_response(data)
