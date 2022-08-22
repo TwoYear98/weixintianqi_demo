@@ -64,3 +64,13 @@ def get_count():
     """
     counter = Counters.query.filter(Counters.id == 1).first()
     return make_succ_response(0) if counter is None else make_succ_response(counter.count)
+
+
+@app.route("/api/get_message", methods=['POST'])
+def get_message():
+    """
+    :return: 返回消息
+    """
+    data = request.args.to_dict()
+    print(data)
+    return data
