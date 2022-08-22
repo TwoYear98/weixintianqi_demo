@@ -74,6 +74,8 @@ def get_message():
     print(request.args.to_dict())
     print(request.form.to_dict())
     print(request.data)
+    data = request.form.get("data")
+    print(data)
     # data = request.get_json()
     print("data")
     data = "Success"
