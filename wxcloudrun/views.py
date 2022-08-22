@@ -73,4 +73,4 @@ def get_message():
     """
     data = request.args.to_dict()
     print(data)
-    return data
+    return ""
