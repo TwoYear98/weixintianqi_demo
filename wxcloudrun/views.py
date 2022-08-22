@@ -5,6 +5,7 @@ from run import app
 # from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 import xmltodict
+import json
 
 
 @app.route("/api/get_message", methods=['POST', 'GET'])
@@ -19,18 +20,8 @@ def get_message():
         return "Success"
     elif request.method == 'POST':
         # 表示微信服务器转发消息到本地服务器
-        xml_str = request.data
-        xml_dict = xmltodict.parse(xml_str)
-        xml_dict1 = xml_dict.get('xml')
-        # print(xml_dict1)
-        # 提取消息类型
-        msg_type = xml_dict1.get('MsgType')
-
-        # print(msg_type)
-        if msg_type == 'text':
-            # 这是文本消息
-            # 构造返回值，由为微信服务器回复消息
-            # 重点：以下参数值一个不能少，一个字母不能错，大小写不能错，键名必须完全一样
+        xml_dict1 = json.loads(request.get_data())
+        if xml_dict1.get('MsgType') == 'text':
             resp_dict = {
                 "xml": {
                     'ToUserName': xml_dict1.get('FromUserName'),
@@ -40,7 +31,6 @@ def get_message():
                     'Content': xml_dict1.get('Content'),
                 }
             }
-            # print(resp_dict)
         else:
             resp_dict = {
                 "xml": {
