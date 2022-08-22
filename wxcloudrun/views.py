@@ -16,19 +16,10 @@ def get_message():
     timestamp = request.args.get('timestamp')
     nonce = request.args.get('nonce')
     if request.method == 'GET':
-        # 第一次接入服务器
-        echostr = request.args.get('echostr')
-        if not echostr:
-            abort(403)
-        else:
-            return echostr
+        return "Success"
     elif request.method == 'POST':
         # 表示微信服务器转发消息到本地服务器
         xml_str = request.data
-        # print(xml_str)
-        if not xml_str:
-            return abort(403)
-        # 对xml字符串进行解析
         xml_dict = xmltodict.parse(xml_str)
         xml_dict1 = xml_dict.get('xml')
         # print(xml_dict1)
