@@ -8,6 +8,11 @@ import xmltodict
 import json
 
 
+@app.route("/", methods=['POST', 'GET'])
+def home():
+    return "Success"
+
+
 @app.route("/api/get_message", methods=['POST', 'GET'])
 def get_message():
     """
